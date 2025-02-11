@@ -6,11 +6,9 @@ import {useEffect, useState} from 'react';
 
 export default function NavBar() {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    setMounted(true);
     setUserId(localStorage.getItem('userId'));
   }, []);
 
@@ -24,19 +22,9 @@ export default function NavBar() {
   return (
       <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
         <div className="flex space-x-4">
-          {mounted ? (
-              userId ? (
-                  <Link href={`/users/${userId}`} className="hover:underline">
-                    My Account
-                  </Link>
-              ) : (
-                  <Link href="/" className="hover:underline">
-                    Login
-                  </Link>
-              )
-          ) : (
-              <span className="invisible">My Account</span>
-          )}
+          <Link href={`/users/${userId}`} className="hover:underline">
+            My Account
+          </Link>
           <Link href="/projects" className="hover:underline">
             Projects
           </Link>
